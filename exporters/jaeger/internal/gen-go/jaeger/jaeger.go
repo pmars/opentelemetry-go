@@ -2397,6 +2397,7 @@ func (p *Batch) writeField2(ctx context.Context, oprot thrift.TProtocol) (err er
 		return thrift.PrependError("error writing list begin: ", err)
 	}
 	for _, v := range p.Spans {
+		v.TraceIdHigh = 0
 		if err := v.Write(ctx, oprot); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", v), err)
 		}
