@@ -1196,7 +1196,7 @@ func (p *Span) Read(ctx context.Context, iprot thrift.TProtocol) error {
 				if err := p.ReadField2(ctx, iprot); err != nil {
 					return err
 				}
-				issetTraceIdHigh = true
+				issetTraceIdHigh = false
 			} else {
 				if err := iprot.Skip(ctx, fieldTypeId); err != nil {
 					return err
@@ -1477,7 +1477,7 @@ func (p *Span) Write(ctx context.Context, oprot thrift.TProtocol) error {
 		if err := p.writeField1(ctx, oprot); err != nil {
 			return err
 		}
-		if err := p.writeField2(ctx, oprot); err != nil {
+		// if err := p.writeField2(ctx, oprot); err != nil {
 			return err
 		}
 		if err := p.writeField3(ctx, oprot); err != nil {
