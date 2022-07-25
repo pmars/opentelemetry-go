@@ -970,9 +970,9 @@ func (p *SpanRef) Write(ctx context.Context, oprot thrift.TProtocol) error {
 		if err := p.writeField2(ctx, oprot); err != nil {
 			return err
 		}
-		if err := p.writeField3(ctx, oprot); err != nil {
-			return err
-		}
+		//if err := p.writeField3(ctx, oprot); err != nil {
+		//	return err
+		//}
 		if err := p.writeField4(ctx, oprot); err != nil {
 			return err
 		}
