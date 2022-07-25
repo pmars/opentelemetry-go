@@ -1478,8 +1478,8 @@ func (p *Span) Write(ctx context.Context, oprot thrift.TProtocol) error {
 			return err
 		}
 		// if err := p.writeField2(ctx, oprot); err != nil {
-			return err
-		}
+		//	return err
+		//}
 		if err := p.writeField3(ctx, oprot); err != nil {
 			return err
 		}
