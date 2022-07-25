@@ -65,7 +65,7 @@ func (t TraceID) MarshalJSON() ([]byte, error) {
 
 // String returns the hex string representation form of a TraceID.
 func (t TraceID) String() string {
-	return hex.EncodeToString(t[:])
+	return hex.EncodeToString(t[8:])
 }
 
 // SpanID is a unique identity of a span in a trace.
@@ -97,7 +97,7 @@ func (s SpanID) String() string {
 // nolint:revive // revive complains about stutter of `trace.TraceIDFromHex`.
 func TraceIDFromHex(h string) (TraceID, error) {
 	t := TraceID{}
-	if len(h) != 32 {
+	if len(h) != 16 {
 		return t, errInvalidTraceIDLength
 	}
 
