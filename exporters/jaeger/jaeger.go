@@ -203,10 +203,10 @@ func spanToThrift(ss sdktrace.ReadOnlySpan) *gen.Span {
 		tid := link.SpanContext.TraceID()
 		sid := link.SpanContext.SpanID()
 		refs = append(refs, &gen.SpanRef{
-			TraceIdHigh: int64(binary.BigEndian.Uint64(tid[0:8])),
-			TraceIdLow:  int64(binary.BigEndian.Uint64(tid[8:16])),
-			SpanId:      int64(binary.BigEndian.Uint64(sid[:])),
-			RefType:     gen.SpanRefType_FOLLOWS_FROM,
+			// TraceIdHigh: int64(binary.BigEndian.Uint64(tid[0:8])),
+			TraceIdLow: int64(binary.BigEndian.Uint64(tid[8:16])),
+			SpanId:     int64(binary.BigEndian.Uint64(sid[:])),
+			RefType:    gen.SpanRefType_FOLLOWS_FROM,
 		})
 	}
 
@@ -214,7 +214,7 @@ func spanToThrift(ss sdktrace.ReadOnlySpan) *gen.Span {
 	sid := ss.SpanContext().SpanID()
 	psid := ss.Parent().SpanID()
 	return &gen.Span{
-		TraceIdHigh:   int64(binary.BigEndian.Uint64(tid[0:8])),
+		// TraceIdHigh:   int64(binary.BigEndian.Uint64(tid[0:8])),
 		TraceIdLow:    int64(binary.BigEndian.Uint64(tid[8:16])),
 		SpanId:        int64(binary.BigEndian.Uint64(sid[:])),
 		ParentSpanId:  int64(binary.BigEndian.Uint64(psid[:])),
