@@ -68,6 +68,11 @@ func (t TraceID) String() string {
 	return hex.EncodeToString(t[8:])
 }
 
+// StringPre returns the hex string representation form of a TraceID.
+func (t TraceID) StringPre() string {
+	return hex.EncodeToString(t[:8])
+}
+
 // SpanID is a unique identity of a span in a trace.
 type SpanID [8]byte
 
@@ -97,7 +102,7 @@ func (s SpanID) String() string {
 // nolint:revive // revive complains about stutter of `trace.TraceIDFromHex`.
 func TraceIDFromHex(h string) (TraceID, error) {
 	t := TraceID{}
-	if len(h) != 16 {
+	if len(h) != 32 {
 		return t, errInvalidTraceIDLength
 	}
 

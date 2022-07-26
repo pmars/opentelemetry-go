@@ -1196,7 +1196,7 @@ func (p *Span) Read(ctx context.Context, iprot thrift.TProtocol) error {
 				if err := p.ReadField2(ctx, iprot); err != nil {
 					return err
 				}
-				issetTraceIdHigh = false
+				issetTraceIdHigh = true
 			} else {
 				if err := iprot.Skip(ctx, fieldTypeId); err != nil {
 					return err
@@ -1477,9 +1477,9 @@ func (p *Span) Write(ctx context.Context, oprot thrift.TProtocol) error {
 		if err := p.writeField1(ctx, oprot); err != nil {
 			return err
 		}
-		// if err := p.writeField2(ctx, oprot); err != nil {
-		//	return err
-		//}
+		if err := p.writeField2(ctx, oprot); err != nil {
+			return err
+		}
 		if err := p.writeField3(ctx, oprot); err != nil {
 			return err
 		}
@@ -1529,6 +1529,7 @@ func (p *Span) writeField1(ctx context.Context, oprot thrift.TProtocol) (err err
 	}
 	return err
 }
+
 
 func (p *Span) writeField2(ctx context.Context, oprot thrift.TProtocol) (err error) {
 	if err := oprot.WriteFieldBegin(ctx, "traceIdHigh", thrift.I64, 2); err != nil {
@@ -2397,7 +2398,6 @@ func (p *Batch) writeField2(ctx context.Context, oprot thrift.TProtocol) (err er
 		return thrift.PrependError("error writing list begin: ", err)
 	}
 	for _, v := range p.Spans {
-		v.TraceIdHigh = 0
 		if err := v.Write(ctx, oprot); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", v), err)
 		}
