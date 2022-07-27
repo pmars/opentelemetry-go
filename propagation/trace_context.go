@@ -57,17 +57,17 @@ func (tc TraceContext) Inject(ctx context.Context, carrier TextMapCarrier) {
 	// Clear all flags other than the trace-context supported sampling bit.
 	flags := sc.TraceFlags() & trace.FlagsSampled
 
-	h := fmt.Sprintf("%s:%s:%s:%v",
-		// supportedVersion,
-		sc.TraceID().String(),
-		sc.SpanID(),
-		"",
-		flags)
-	//h := fmt.Sprintf("%.2x-%s-%s-%s",
-	//	supportedVersion,
-	//	sc.TraceID(),
+	//h := fmt.Sprintf("%s:%s:%s:%v",
+	//	// supportedVersion,
+	//	sc.TraceID().String(),
 	//	sc.SpanID(),
+	//	"",
 	//	flags)
+	h := fmt.Sprintf("%.2x-%s-%s-%s",
+		supportedVersion,
+		sc.TraceID(),
+		sc.SpanID(),
+		flags)
 	carrier.Set(traceparentHeader, h)
 }
 
